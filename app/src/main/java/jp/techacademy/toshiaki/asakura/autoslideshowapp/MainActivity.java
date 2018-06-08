@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBackButton.setOnClickListener(this);
 
         ContentResolver resolver = getContentResolver();
-        Cursor mCursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
+        mCursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
 
         // Android 6.0以降の場合
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -86,9 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void getContentsInfo1() {
 
-        ContentResolver resolver = getContentResolver();
-        mCursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
-
         if (mCursor.moveToFirst()) {
 
             int fieldIndex = mCursor.getColumnIndex(MediaStore.Images.Media._ID);
@@ -105,11 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void getContentsInfo2() {
         Log.d("asat", "【進む】ボタンは正常に動いています！");
 
-        ContentResolver resolver = getContentResolver();
-        mCursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
-
-        if (mCursor!=null) {
-
             int fieldIndex = mCursor.getColumnIndex(MediaStore.Images.Media._ID);
             mCursor.moveToNext();
             Long id = mCursor.getLong(fieldIndex);
@@ -118,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("asat", imageUri.toString());
             ImageView mImageView = (ImageView) findViewById(R.id.imageView);
             mImageView.setImageURI(imageUri);
-        }   mCursor.close();
     }
 
     public void getContentsInfo3() {
@@ -128,7 +119,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("asat", "【戻る】ボタンは正常に動いています！");
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mCursor != null) {
+            mCursor.close();
+        }
+    }
 }
 
 
