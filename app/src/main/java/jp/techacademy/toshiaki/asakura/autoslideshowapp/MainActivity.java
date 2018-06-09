@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆初期画面表示
     public void getContentsInfo() {
 
         Button mGoButton = (Button) findViewById(R.id.buttonGo);
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆進む
     public void getImageNext() {
         Log.d("asat", "【進む】ボタンは正常に動いています！");
 
@@ -128,9 +130,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆再生/停止
     public void getImageAuto() {
         Log.d("asat", "【再生/停止】ボタンは正常に動いています！");
         Button mBackButton = (Button) findViewById(R.id.buttonBack);
+        Button mAutoButton = (Button) findViewById(R.id.buttonAuto);
         Button mGoButton = (Button) findViewById(R.id.buttonGo);
 
         if (mTimer == null){
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mGoButton.setTextColor(0xff888888);
             mBackButton.setEnabled(false);
             mBackButton.setTextColor(0xff888888);
+            mAutoButton.setText("停止");
 
             mTimer = new Timer();
             mTimer.schedule(new TimerTask() {
@@ -170,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
-            }, 300, 500);
+            }, 2000, 2000);
 
         } else{
 
@@ -180,11 +185,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mGoButton.setTextColor(0xff000000);
             mBackButton.setEnabled(true);
             mBackButton.setTextColor(0xff000000);
+            mAutoButton.setText("再生");
 
             mTimer = null;
         }
-
     }
+
+    //◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆戻る
     public void getImagePreview() {
         Log.d("asat", "【戻る】ボタンは正常に動いています！");
         if (mCursor.moveToPrevious()) {
@@ -207,7 +214,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ImageView mImageView = (ImageView) findViewById(R.id.imageView);
             mImageView.setImageURI(imageUri);
         }
-
     }
 
     @Override
